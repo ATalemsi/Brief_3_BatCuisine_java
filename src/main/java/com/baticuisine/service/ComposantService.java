@@ -3,7 +3,6 @@ package main.java.com.baticuisine.service;
 import main.java.com.baticuisine.dao.Imp.ComposantDaoImp;
 import main.java.com.baticuisine.model.Composant;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class ComposantService {
