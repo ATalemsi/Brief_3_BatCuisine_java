@@ -20,6 +20,9 @@ public class Materiel extends Composant {
     }
 
     public void setCoutUnitaire(double coutUnitaire) {
+        if (coutUnitaire < 0) {
+            throw new IllegalArgumentException("Le coût unitaire ne peut pas être négatif");
+        }
         this.coutUnitaire = coutUnitaire;
     }
 
@@ -28,6 +31,9 @@ public class Materiel extends Composant {
     }
 
     public void setQuantite(double quantite) {
+        if (quantite < 0) {
+            throw new IllegalArgumentException("La quantité ne peut pas être négative");
+        }
         this.quantite = quantite;
     }
 
@@ -36,6 +42,9 @@ public class Materiel extends Composant {
     }
 
     public void setCoutTransport(double coutTransport) {
+        if (coutTransport < 0) {
+            throw new IllegalArgumentException("Le coût de transport ne peut pas être négatif");
+        }
         this.coutTransport = coutTransport;
     }
 
@@ -44,6 +53,9 @@ public class Materiel extends Composant {
     }
 
     public void setCoefficientQualite(double coefficientQualite) {
+        if (coefficientQualite <= 0) {
+            throw new IllegalArgumentException("Le coefficient de qualité ne peut pas être nul ou négatif");
+        }
         this.coefficientQualite = coefficientQualite;
     }
 
@@ -51,4 +63,19 @@ public class Materiel extends Composant {
     public double calculerCout() {
         return (coutUnitaire * quantite * coefficientQualite) + coutTransport;
     }
+
+    @Override
+    public String toString() {
+        return "Materiel{" +
+                "nom=" + getNom() +
+                ", coutUnitaire=" + coutUnitaire +
+                ", quantite=" + quantite +
+                ", coutTransport=" + coutTransport +
+                ", coefficientQualite=" + coefficientQualite +
+                ", idProjet=" + getIdProjet() +
+                '}';
+    }
+
+
+
 }

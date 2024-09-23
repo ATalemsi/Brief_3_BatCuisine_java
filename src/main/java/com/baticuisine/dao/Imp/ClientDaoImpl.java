@@ -18,12 +18,13 @@ public class ClientDaoImpl {
 
 
     public void add(Client client) {
-        String sql = "insert into client values(?,?,?,?)";
+        String sql = "insert into clients(nom,prenom,adresse,telephone,est_professionnel) values(?,?,?,?,?)";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1,client.getNom());
             ps.setString(2,client.getPrenom());
             ps.setString(3,client.getAdresse());
-            ps.setBoolean(4,client.isEstProfessionnel());
+            ps.setString(4,client.getTelephone());
+            ps.setBoolean(5,client.isEstProfessionnel());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -81,5 +82,22 @@ public class ClientDaoImpl {
             }
         }
         return clients;
+    }
+
+    public Client rechercherParNom(String nomClient) {
+        String sql = "SELECT * FROM clients WHERE nom = ?";
+        Client client = null;
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, nomClient);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                client = new Client(rs.getString("nom"),rs.getString("prenom"),rs.getString("adresse"),rs.getString("telephone"),rs.getBoolean("est_professionnel"));
+                client.setId_client(rs.getInt("id_client"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return client;
     }
 }

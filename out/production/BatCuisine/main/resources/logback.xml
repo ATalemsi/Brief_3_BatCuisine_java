@@ -1,0 +1,13 @@
+<configuration>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%msg%n</pattern> <!-- This will print only the message -->
+        </encoder>
+    </appender>
+
+    <logger name="main.java.com.baticuisine.Presentation.GestionProjetsCLI" level="INFO" />
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
+    </root>
+</configuration>

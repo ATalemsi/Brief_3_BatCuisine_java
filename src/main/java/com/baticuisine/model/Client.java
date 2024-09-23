@@ -1,7 +1,7 @@
 package main.java.com.baticuisine.model;
 
 public class Client {
-    private int id;
+    private int id_client;
     private String nom;
     private String prenom;
     private String adresse;
@@ -13,8 +13,18 @@ public class Client {
         this.nom = nom;
         this.prenom = prenom;
         this.adresse = adresse;
-        this.telephone = this.telephone;
+        this.telephone = telephone;
         this.estProfessionnel = false;
+
+
+    }
+
+    public Client(String nom,String prenom, String adresse, String telephone, boolean estProfessionnel) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.adresse = adresse;
+        this.telephone = telephone;
+        this.estProfessionnel = estProfessionnel;
     }
 
     public String getNom() {
@@ -47,10 +57,10 @@ public class Client {
     public void setEstProfessionnel(boolean estProfessionnel) {
         this.estProfessionnel = estProfessionnel;
     }
-    public int getId() {
-        return id;
+    public int getId_client() {
+        return id_client;
     }
-    public void setId(int id) {
-        this.id = id;
+    public void setId_client(int id_client) {
+        this.id_client = id_client;
     }
 }
