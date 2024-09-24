@@ -6,6 +6,7 @@ import main.java.com.baticuisine.controller.DevisController;
 import main.java.com.baticuisine.controller.ProjetController;
 import main.java.com.baticuisine.model.*;
 
+import main.java.com.baticuisine.utils.Validation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -52,45 +53,31 @@ public class GestionProjetsCLI {
                     case 1:
                         // Create a new project
                         logger.info("--- Création d'un Nouveau Projet ---");
-                        logger.info("Entrez le nom du projet : ");
-                        String nomProjet = scanner.nextLine();
-                        logger.info("Entrez Adresse du chantier : ");
-                        String adresse_chantier = scanner.nextLine();
-                        logger.info("Entrez la surface de la cuisine (en m²) : ");
-                        double surface = scanner.nextDouble();
-                        scanner.nextLine();  // Consume newline
+                        String nomProjet =  Validation.getValidatedStringNom(scanner, "Entrez le nom du projet : ");
+                        String adresse_chantier = Validation.getValidatedStringInput(scanner, "Entrez l'adresse du chantier : ");
+                        double surface = Validation.getValidatedDoubleInput(scanner, "Entrez la surface de la cuisine (en m²) : ");
 
 
                         logger.info("--- Recherche de client ---");
-                        logger.info("Souhaitez-vous chercher un client existant ou en ajouter un nouveau ?");
-                        logger.info("1. Chercher un client existant");
-                        logger.info("2. Ajouter un nouveau client");
-                        logger.info("Choisissez une option : ");
-                        int clientOption = scanner.nextInt();
-                        scanner.nextLine();
+                        int clientOption = Validation.getValidatedIntegerInput(scanner,
+                                "Souhaitez-vous chercher un client existant ou en ajouter un nouveau ??\n1. Chercher un client existant\n2. Ajouter un nouveau client\nChoisissez une option : ");
 
                         Client client = null;
                         if (clientOption == 1) {
-                            logger.info("Entrez le nom du client : ");
-                            String nomClient = scanner.nextLine();
+                            String nomClient = Validation.getValidatedStringInput(scanner, "Entrez le nom du client existant : ");
                             client = clientController.rechercherParNom(nomClient);
                             if (client == null) {
                                 logger.warn("Client non trouvé.");
                                 continue;
                             }
                         } else if (clientOption == 2) {
-                            logger.info("Entrez le nom du client : ");
-                            String nomClient = scanner.nextLine();
-                            logger.info("Entrez le prenom du client : ");
-                            String prenomClient = scanner.nextLine();
-                            logger.info("Entrez l'adresse du client : ");
-                            String adresse = scanner.nextLine();
-                            logger.info("Entrez le numéro de téléphone du client : ");
-                            String telephone = scanner.nextLine();
-                            logger.info("Client est-il professionnel ? (true/false) : ");
-                            boolean estProfessionnel = scanner.nextBoolean();
-                            scanner.nextLine();
-                            client = new Client(nomClient, prenomClient, adresse, telephone, estProfessionnel);
+                            String nomClient = Validation.getValidatedStringNom(scanner, "Entrez le nom du nouveau client : ");
+                            String prenomClient = Validation.getValidatedStringInput(scanner, "Entrez le prénom du client : ");
+                            String adresseClient = Validation.getValidatedStringInput(scanner, "Entrez l'adresse du client : ");
+                            String telephoneClient = Validation.getValidatedStringInput(scanner, "Entrez le numéro de téléphone du client : ");
+                            boolean estProfessionnel = Validation.getValidatedBooleanInput(scanner, "Le client est-il professionnel ? (true/false) : ");
+
+                            client = new Client(nomClient, prenomClient, adresseClient, telephoneClient, estProfessionnel);
                             clientController.addClient(client);
                         }
 
@@ -109,30 +96,23 @@ public class GestionProjetsCLI {
 
                         logger.info("--- Ajout des matériaux ---");
                         while (true) {
-                            logger.info("Entrez le nom du matériau : ");
-                            String nomMateriel = scanner.nextLine();
+                            String nomMateriel = Validation.getValidatedStringInput(scanner, "Entrez le nom du matériau : ");
 
-                            logger.info("Entrez la quantité de ce matériau (en unités) : "); // Adding unit as 'unités'
-                            double quantite = scanner.nextDouble();
+                            double quantite = Validation.getValidatedDoubleInput(scanner, "Entrez la quantité de ce matériau  (en unités) : ");;
 
-                            logger.info("Entrez le coût unitaire de ce matériau (en MAD par unité) : "); // Unit: 'euros'
-                            double coutUnitaire = scanner.nextDouble();
+                            double coutUnitaire = Validation.getValidatedDoubleInput(scanner, "Entrez le coût unitaire de ce matériau (en MAD par unité) : ");;
 
-                            logger.info("Entrez le coût de transport de ce matériau (en MAD) : "); // Unit: 'euros'
-                            double coutTransport = scanner.nextDouble();
+                            double coutTransport = Validation.getValidatedDoubleInput(scanner, "Coût de transport (en MAD) : ");;
 
-                            logger.info("Entrez le coefficient de qualité du matériau (sans unité, par exemple (1,0)) : "); // No unit
-                            double coefficientQualite = scanner.nextDouble();
+                            double coefficientQualite = Validation.getValidatedDoubleInput(scanner, "Entrez le coefficient de qualité du matériau (sans unité, par exemple (1,0)) : ");
 
-                            logger.info("Entrez le taux de TVA du matériau (en pourcentage, par exemple 20 pour 20%) : "); // Unit: percentage
-                            double tauxTva = scanner.nextDouble();
 
+                            double tauxTva =  Validation.getValidatedPercentageInput(scanner, "Entrez le taux de TVA du matériau (en pourcentage, par exemple 20 pour 20%)  : ");;
 
                             int idProjet = projectId;
-                            scanner.nextLine();
 
                             Materiel materiel = new Materiel(nomMateriel, tauxTva, coutUnitaire, quantite, coutTransport, coefficientQualite, idProjet);
-                            composantController.addComposant(materiel);  // Controller interacts with DAO
+                            composantController.addComposant(materiel);
 
                             logger.info("Matériau ajouté avec succès !");
                             logger.info("Voulez-vous ajouter un autre matériau ? (y/n) : ");
@@ -144,25 +124,19 @@ public class GestionProjetsCLI {
                         // Add labor (Main-d'œuvre)
                         logger.info("--- Ajout de la main-d'œuvre ---");
                         while (true) {
-                            logger.info("Entrez le nom de la main-d'œuvre : ");
-                            String nomMainDoeuvre = scanner.nextLine();
+
+                            String nomMainDoeuvre =Validation.getValidatedStringInput(scanner, "Entrez le nom de la main-d'œuvre : ");;
 
                             logger.info("Entrez le taux horaire de cette main-d'œuvre (en MAD par heure) : "); // Unit: 'euros/hour'
-                            double tauxHoraire = scanner.nextDouble();
+                            double tauxHoraire = Validation.getValidatedDoubleInput(scanner, "Entrez le taux horaire de cette main-d'œuvre (en MAD par heure) : ");;
 
-                            logger.info("Entrez le nombre d'heures travaillées (en heures) : "); // Unit: 'hours'
-                            double heuresTravail = scanner.nextDouble();
+                            double heuresTravail =Validation.getValidatedDoubleInput(scanner, "Entrez le nombre d'heures travaillées (en heures) :  ");;
 
-                            logger.info("Entrez le taux de TVA de la main-d'œuvre (en pourcentage, par exemple 20 pour 20%) : "); // Unit: percentage
-                            double tauxTva = scanner.nextDouble();
+                            double tauxTva =Validation.getValidatedPercentageInput(scanner, "Entrez le taux de TVA de la main-d'œuvre (en pourcentage, par exemple 20 pour 20%) : ");;
 
-                            logger.info("Entrez la productivité de l'ouvrier (sans unité, par exemple (0.8)) : "); // No unit
-                            double productiviteOuvrier = scanner.nextDouble();
+                            double productiviteOuvrier = Validation.getValidatedDoubleInput(scanner, "Entrez la productivité de l'ouvrier (sans unité, par exemple (0.8)) : ");
 
                             int idProjet = projectId;
-
-                            scanner.nextLine();  // Consume newline
-
 
                             MainOeuvre mainDoeuvre = new MainOeuvre(nomMainDoeuvre, tauxTva, tauxHoraire, heuresTravail, productiviteOuvrier, idProjet);
                             composantController.addComposant(mainDoeuvre);
@@ -179,41 +153,28 @@ public class GestionProjetsCLI {
                         boolean appliquerTva = scanner.nextLine().equalsIgnoreCase("y");
                         double tva = 0.2;
                         if (appliquerTva) {
-                            logger.info("Entrez le pourcentage de TVA (%) : ");
-                            tva = scanner.nextDouble();
-                            scanner.nextLine();
+                            tva = Validation.getValidatedPercentageInput(scanner, "Entrez le pourcentage de TVA (%) :");
                         }
 
                         logger.info("Souhaitez-vous appliquer une marge bénéficiaire au projet ? (y/n) : ");
                         boolean appliquerMarge = scanner.nextLine().equalsIgnoreCase("y");
                         double marge = 0;
                         if (appliquerMarge) {
-                            logger.info("Entrez le pourcentage de marge bénéficiaire (%) : ");
-                            marge = scanner.nextDouble();
-                            scanner.nextLine();
+                            marge = Validation.getValidatedPercentageInput(scanner, "Entrez le pourcentage de marge bénéficiaire (%) :");
+
                         }
 
                         double coutTotalProject = projetController.calculerCoutTotal(projet, projectId, composants, tva, marge, client);
                         logger.info("Coût total du projet : " + coutTotalProject + " €");
 
-                        // Save estimate
+
                         logger.info("--- Enregistrement du Devis ---");
-                        logger.info("Entrez la date d'émission du devis (format : jj/mm/aaaa) : ");
-                        String dateEmissionStr = scanner.nextLine();
-                        logger.info("Entrez la date de validité du devis (format : jj/mm/aaaa) : ");
-                        String dateValiditeStr = scanner.nextLine();
+                        LocalDate dateEmission =  Validation.getValidatedDateInput(scanner, "Entrez la date d'émission du devis (format : jj/mm/aaaa) :  ");;
+                        LocalDate dateValidite = Validation.getValidatedDateInput(scanner, "Entrez la date de validité du devis (format : jj/mm/aaaa) : ");
 
                         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                        LocalDate dateEmission = null;
-                        LocalDate dateValidite = null;
-                        try {
-                            dateEmission = LocalDate.parse(dateEmissionStr, formatter);
-                            dateValidite = LocalDate.parse(dateValiditeStr, formatter);
-                        } catch (DateTimeParseException e) {
-                            logger.info("Erreur de format de date. Veuillez entrer une date au format jj/mm/aaaa.");
-                            break;
-                        }
-
+                        logger.info("Date d'émission : " + dateEmission.format(formatter));
+                        logger.info("Date de validité : " + dateValidite.format(formatter));
                         double montantEstime = projetController.calculerCoutTotal(projet, projectId, composants, tva, marge, client);
                         boolean accepte = false;
 
@@ -223,7 +184,6 @@ public class GestionProjetsCLI {
                         logger.info("Devis enregistré avec succès !");
                         break;
                     case 2:
-                        // Display existing projects
                         logger.info("--- Affichage des Projets Existants ---");
                         projetController.getAllProjects();
                         break;
@@ -240,9 +200,7 @@ public class GestionProjetsCLI {
                         for (Projet p : allProjects) {
                             logger.info("ID: " + p.getId() + ", Nom: " + p.getNomProjet());
                         }
-                        logger.info("Entrez l'ID du projet pour lequel vous voulez calculer le coût : ");
-                        int IdProjet = scanner.nextInt();
-                        scanner.nextLine();
+                        int IdProjet = Validation.getValidatedIntegerInput(scanner,"Entrez l'ID du projet pour lequel vous voulez calculer le coût :");
 
                         Projet projectById = projetController.getProjectById(IdProjet);
                         double Total = projectById.getCoutTotal();
@@ -258,38 +216,23 @@ public class GestionProjetsCLI {
                                 boolean createDevis = scanner.nextLine().equalsIgnoreCase("y");
                                 if (createDevis) {
                                     // Create new variables for quote creation
-                                    String dateEmissionStrNew;
-                                    String dateValiditeStrNew;
-                                    DateTimeFormatter formatterNew = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                                     LocalDate dateEmissionNew = null;
                                     LocalDate dateValiditeNew = null;
                                     double montantEstimeNew;
                                     boolean accepteNew = false;
 
-                                    // Collect date information for the quote
                                     logger.info("--- Enregistrement du Devis ---");
-                                    logger.info("Entrez la date d'émission du devis (format : jj/mm/aaaa) : ");
-                                    dateEmissionStrNew = scanner.nextLine();
-                                    logger.info("Entrez la date de validité du devis (format : jj/mm/aaaa) : ");
-                                    dateValiditeStrNew = scanner.nextLine();
+                                    dateEmissionNew = Validation.getValidatedDateInput(scanner, "Entrez la date d'émission du devis (format : jj/mm/aaaa) :  ");; // Validate date input
+                                    dateValiditeNew = Validation.getValidatedDateInput(scanner, "Entrez la date de validité du devis (format : jj/mm/aaaa) : ");  // Validate date input
 
-                                    try {
-                                        dateEmissionNew = LocalDate.parse(dateEmissionStrNew, formatterNew);
-                                        dateValiditeNew = LocalDate.parse(dateValiditeStrNew, formatterNew);
-                                    } catch (DateTimeParseException e) {
-                                        logger.info("Erreur de format de date. Veuillez entrer une date au format jj/mm/aaaa.");
-                                        break;
-                                    }
                                     logger.info("Souhaitez-vous appliquer une marge bénéficiaire au projet ? (y/n) : ");
                                     boolean appliquerMargeNew = scanner.nextLine().equalsIgnoreCase("y");
                                     double margeNew = 0;
                                     if (appliquerMargeNew) {
-                                        logger.info("Entrez le pourcentage de marge bénéficiaire (%) : ");
-                                        margeNew = scanner.nextDouble();
-                                        scanner.nextLine();
-                                        System.out.println("marge : "+margeNew);
+                                        margeNew = Validation.getValidatedPercentageInput(scanner, "Entrez le pourcentage de marge bénéficiaire (%) :"); // Validate percentage (0-100)
+                                        logger.info("Marge bénéficiaire : " + margeNew + "%");
                                     }
-                                    logger.info("Entrez l'ID du client pour le devis : ");
+                                    logger.info("List de Client : ");
                                     Client clientNewDevis = getClient();
                                     montantEstimeNew = projetController.calculerCoutTotal(projectById, IdProjet,
                                             composantController.getAllComposants(), 0.2, margeNew, clientNewDevis);
@@ -340,14 +283,13 @@ public class GestionProjetsCLI {
         List<Client> clients = clientController.getAllClients();
         if (clients.isEmpty()) {
             logger.info("Aucun client trouvé.");
-            // Logic to create a new client and return it
             return null;
         }
 
         logger.info("Clients disponibles : ");
         clients.forEach(c -> logger.info("ID: " + c.getId_client() + ", Nom: " + c.getNom()));
         logger.info("Entrez l'ID du client : ");
-        int clientId = scanner.nextInt();
+        int clientId = Validation.validateIntegerInput(scanner.nextLine());
         scanner.nextLine();
 
         return clients.stream()
