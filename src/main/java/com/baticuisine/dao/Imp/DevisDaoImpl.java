@@ -67,7 +67,7 @@ public class DevisDaoImpl implements DevisDao {
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                return new Devis(rs.getDouble("montant_estime"), rs.getDate("date_emission"), rs.getDate("date_validite"), rs.getBoolean("accepte"), rs.getInt("id_projet"));
+                return new Devis(rs.getDouble("montant_estime"), rs.getDate("date_emission").toLocalDate(), rs.getDate("date_validite").toLocalDate(), rs.getBoolean("accepte"), rs.getInt("id_projet"));
             }
         }catch (SQLException e){
             e.printStackTrace();
@@ -82,12 +82,43 @@ public class DevisDaoImpl implements DevisDao {
         try (Statement stmt = conn.createStatement()) {
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
-                devisList.add(new Devis( rs.getDouble("montant_estime"), rs.getDate("date_emission"), rs.getDate("date_validite"), rs.getBoolean("accepte"), rs.getInt("id_projet")));
+                devisList.add(new Devis( rs.getDouble("montant_estime"), rs.getDate("date_emission").toLocalDate(), rs.getDate("date_validite").toLocalDate(), rs.getBoolean("accepte"), rs.getInt("id_projet")));
             }
         }catch (SQLException e){
             e.printStackTrace();
         }
         return devisList;
+    }
+
+    public boolean updateDevisStatus(int devisId, boolean accepte) {
+        String query = "UPDATE devis SET accepte = ? WHERE id_devis = ?";
+        try (PreparedStatement statement = conn.prepareStatement(query)) {
+            statement.setBoolean(1, accepte);
+            statement.setInt(2, devisId);
+
+            int rowsUpdated = statement.executeUpdate();
+            return rowsUpdated > 0; // Return true if the update was successful
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false; // Return false if the update failed
+        }
+    }
+
+    public Devis getDevisByProjectId(int projectId) {
+        String query = "SELECT * FROM devis WHERE id_projet = ?";
+        Devis devis = null;
+        try (PreparedStatement statement = conn.prepareStatement(query)) {
+            statement.setInt(1, projectId);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                devis = new Devis(resultSet.getDouble("montant_estime"),resultSet.getDate("date_emission").toLocalDate(),resultSet.getDate("date_validite").toLocalDate(),resultSet.getBoolean("accepte"),resultSet.getInt("id_projet"));
+                devis.setId(resultSet.getInt("id_devis"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return devis;
     }
 
 }

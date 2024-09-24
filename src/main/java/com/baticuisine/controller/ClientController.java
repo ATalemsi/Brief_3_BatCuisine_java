@@ -42,7 +42,7 @@ public class ClientController {
         return client;
     }
 
-    public List<Client> getAllClients() throws SQLException {
+    public List<Client> getAllClients(){
         List<Client> clients = clientService.getAllClients();
         logger.info("Fetched all clients.");
         return clients;
@@ -51,4 +51,5 @@ public class ClientController {
     public Client rechercherParNom(String nomClient) {
         return clientService.getClientByName(nomClient);
     }
+
 }

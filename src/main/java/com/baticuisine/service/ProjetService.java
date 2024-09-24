@@ -1,17 +1,15 @@
 package main.java.com.baticuisine.service;
 
 import main.java.com.baticuisine.dao.Imp.ProjetDaoImpl;
-import main.java.com.baticuisine.model.Composant;
-import main.java.com.baticuisine.model.MainOeuvre;
-import main.java.com.baticuisine.model.Materiel;
-import main.java.com.baticuisine.model.Projet;
+import main.java.com.baticuisine.model.*;
 
 import java.sql.Connection;
 import java.util.List;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ProjetService {
-    private static final Logger logger = Logger.getLogger(ProjetService.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger(ProjetService.class.getName());
     private ProjetDaoImpl projetDao;
 
 
@@ -22,12 +20,7 @@ public class ProjetService {
 
     public int addProject(Projet projet) {
         int projectId = projetDao.addProject(projet);
-        if (projectId != -1) {
-            logger.info("Project added successfully with ID: " + projectId);
-        } else {
-            logger.info("Failed to add project.");
-        }
-        return projectId;  // Return the project ID
+        return projectId;
     }
 
 
@@ -37,7 +30,7 @@ public class ProjetService {
             projetDao.updateProject(projet, id);
             logger.info("Project with ID " + id + " updated.");
         } else {
-            logger.warning("Project with ID " + id + " does not exist.");
+            logger.info("Project with ID " + id + " does not exist.");
         }
     }
 
@@ -48,7 +41,7 @@ public class ProjetService {
             projetDao.deleteProject(id);
             logger.info("Project with ID " + id + " deleted.");
         } else {
-            logger.warning("Project with ID " + id + " does not exist.");
+            logger.info("Project with ID " + id + " does not exist.");
         }
     }
 
@@ -62,9 +55,10 @@ public class ProjetService {
         return projetDao.getAllProjects();
     }
 
-    public double calculerCoutTotal(Projet projet,int id, List<Composant> composants, double tva, double marge) {
+    public double calculerCoutTotal(Projet projet, int id, List<Composant> composants, double tva, double marge, Client client) {
         double coutTotal = 0.0;
 
+        // Calculate total component costs
         for (Composant composant : composants) {
             if (composant instanceof Materiel) {
                 Materiel materiel = (Materiel) composant;
@@ -76,13 +70,26 @@ public class ProjetService {
                 coutTotal += coutMainOeuvre;
             }
         }
-
         coutTotal += coutTotal * tva;
         coutTotal += coutTotal * marge;
+        if (client.isEstProfessionnel()) {
+            coutTotal *= 0.90;
+        } else {
 
+            coutTotal *= 0.95;
+        }
         projet.setCoutTotal(coutTotal);
         projet.setMargeBeneficiaire(marge);
-        projetDao.updateCoutTotal(id, coutTotal,marge);
+        projetDao.updateCoutTotal(id, coutTotal, marge);
+
         return coutTotal;
+    }
+
+    public List<Projet> getProjets() {
+        return projetDao.getProjets();
+    }
+
+    public void updateProjectStatus(int projectId, Projet.EtatProjet etatProjet) {
+        projetDao.updateProjectStatus(projectId, etatProjet);
     }
 }

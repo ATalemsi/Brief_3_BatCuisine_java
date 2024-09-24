@@ -46,4 +46,12 @@ public class DevisController {
         logger.info( "Fetched all devis.");
         return devisList;
     }
+
+    public Devis getDevisByProjectId(int projectId) {
+        return devisService.getDevisByProjectId(projectId);
+    }
+
+    public void acceptDevis(int devisId) {
+        devisService.acceptDevis(devisId);  // Update the 'accepté' attribute to true
+    }
 }

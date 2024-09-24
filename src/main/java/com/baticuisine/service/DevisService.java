@@ -51,4 +51,10 @@ public class DevisService {
     public List<Devis> getAllDevis() {
         return devisDao.getAllDevis();
     }
+    public Devis getDevisByProjectId(int projectId) {
+        return devisDao.getDevisByProjectId(projectId);
+    }
+    public void acceptDevis(int devisId) {
+        devisDao.updateDevisStatus(devisId, true);  // Update the 'accepté' attribute to true
+    }
 }

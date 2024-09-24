@@ -30,7 +30,7 @@ public class ClientService {
         return clientDao.rechercherParId(id);
     }
 
-    public List<Client> getAllClients() throws SQLException {
+    public List<Client> getAllClients(){
         return clientDao.rechercherTous();
     }
 

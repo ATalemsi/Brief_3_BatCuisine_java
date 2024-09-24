@@ -78,17 +78,19 @@ public class ProjetDaoImpl implements ProjetDao {
 
     @Override
     public Projet getProject(int id) {
+         Projet projet = null;
         String sql = "SELECT * FROM projets WHERE id_projet = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                return new Projet(rs.getString("nom_projet"), rs.getDouble("marge_beneficiaire"), rs.getDouble("cout_total"), Projet.EtatProjet.valueOf(rs.getString("etat_projet").toUpperCase()), rs.getInt("id_client"), rs.getString("adresse"));
+                projet = new Projet(rs.getString("nom_projet"), rs.getDouble("marge_beneficiaire"), rs.getDouble("cout_total"), Projet.EtatProjet.valueOf(rs.getString("etat_projet").toUpperCase()), rs.getInt("id_client"), rs.getString("adresse"));
+                projet.setId(rs.getInt("id_projet"));
             }
         }catch (SQLException e){
             e.printStackTrace();
         }
-        return null;
+        return projet;
     }
 
     @Override
@@ -170,6 +172,43 @@ public class ProjetDaoImpl implements ProjetDao {
             ps.setDouble(1, coutTotal);
             ps.setDouble(2, marge);
             ps.setInt(3, id);
+            int rows = ps.executeUpdate();
+            System.out.println("rows affected" +rows);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public List<Projet> getProjets() {
+         String sql ="Select * from projets";
+         List<Projet> projets = new ArrayList<>();
+         try(PreparedStatement ps = connection.prepareStatement(sql)) {
+             ResultSet rs = ps.executeQuery();
+             while(rs.next()) {
+
+                 String nomProjet = rs.getString("nom_projet");
+                 double margeBeneficiaire = rs.getDouble("marge_beneficiaire");
+                 double coutTotal = rs.getDouble("cout_total");
+                 Projet.EtatProjet etatProjet = Projet.EtatProjet.valueOf(rs.getString("etat_projet").toUpperCase());
+                 int idClient = rs.getInt("id_client");
+                 String adresse = rs.getString("adresse");
+                 Projet projet = new Projet(nomProjet, margeBeneficiaire, coutTotal, etatProjet, idClient,adresse);
+                 projet.setId(rs.getInt("id_projet"));
+
+              projets.add(projet);
+             }
+
+         }catch (SQLException e) {
+             e.printStackTrace();
+         }
+         return projets;
+    }
+
+    public void updateProjectStatus(int projectId, Projet.EtatProjet etatProjet) {
+        String sql = "UPDATE projets SET etat_projet = ? WHERE id_projet = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, etatProjet.name());
+            ps.setInt(2, projectId);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

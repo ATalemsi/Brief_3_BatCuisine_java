@@ -69,7 +69,7 @@ public class ClientDaoImpl {
         }
         return null;
     }
-    public List<Client> rechercherTous() throws SQLException {
+    public List<Client> rechercherTous() {
         String sql = "SELECT * FROM clients";
         List<Client> clients = new ArrayList<>();
         try (Statement stmt = connection.createStatement()) {
@@ -77,9 +77,12 @@ public class ClientDaoImpl {
             while (rs.next()) {
                 Client client = new Client(rs.getString("nom"), rs.getString("prenom"), rs.getString("adresse"), rs.getString("telephone"));
                 client.setEstProfessionnel(rs.getBoolean("est_professionnel"));
+                client.setId_client(rs.getInt("id_client"));
                 clients.add(client);
 
             }
+        }catch (SQLException e){
+            e.printStackTrace();
         }
         return clients;
     }
