@@ -4,10 +4,11 @@ import main.java.com.baticuisine.model.Devis;
 
 import java.sql.Connection;
 import java.util.List;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class DevisService {
-    private static final Logger logger = Logger.getLogger(DevisService.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger(DevisService.class.getName());
     private DevisDaoImpl devisDao;
 
 
@@ -27,7 +28,7 @@ public class DevisService {
             devisDao.updateDevis(devis, id);
             logger.info("Devis with ID " + id + " updated successfully.");
         } else {
-            logger.warning("Devis with ID " + id + " does not exist.");
+            logger.warn("Devis with ID " + id + " does not exist.");
         }
     }
 
@@ -38,7 +39,7 @@ public class DevisService {
             devisDao.deleteDevis(id);
             logger.info("Devis with ID " + id + " deleted successfully.");
         } else {
-            logger.warning("Devis with ID " + id + " does not exist.");
+            logger.warn("Devis with ID " + id + " does not exist.");
         }
     }
 

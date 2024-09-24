@@ -1,0 +1,15 @@
+2024-09-24 14:47:22 [main] INFO  m.j.c.b.P.GestionProjetsCLI - === Bienvenue dans l'application de gestion des projets de rénovation de cuisines ===
+2024-09-24 14:47:22 [main] INFO  m.j.c.b.P.GestionProjetsCLI - === Menu Principal ===
+2024-09-24 14:47:22 [main] INFO  m.j.c.b.P.GestionProjetsCLI - 1. Créer un nouveau projet
+2024-09-24 14:47:22 [main] INFO  m.j.c.b.P.GestionProjetsCLI - 2. Afficher les projets existants
+2024-09-24 14:47:22 [main] INFO  m.j.c.b.P.GestionProjetsCLI - 3. Calculer le coût d'un projet
+2024-09-24 14:47:22 [main] INFO  m.j.c.b.P.GestionProjetsCLI - 4. Quitter
+2024-09-24 14:47:22 [main] INFO  m.j.c.b.P.GestionProjetsCLI - Choisissez une option : 
+2024-09-24 14:47:25 [main] INFO  m.j.c.b.P.GestionProjetsCLI - --- Création d'un Nouveau Projet ---
+2024-09-24 14:48:44 [main] INFO  m.j.c.b.P.GestionProjetsCLI - === Bienvenue dans l'application de gestion des projets de rénovation de cuisines ===
+2024-09-24 14:48:44 [main] INFO  m.j.c.b.P.GestionProjetsCLI - === Menu Principal ===
+2024-09-24 14:48:44 [main] INFO  m.j.c.b.P.GestionProjetsCLI - 1. Créer un nouveau projet
+2024-09-24 14:48:44 [main] INFO  m.j.c.b.P.GestionProjetsCLI - 2. Afficher les projets existants
+2024-09-24 14:48:44 [main] INFO  m.j.c.b.P.GestionProjetsCLI - 3. Calculer le coût d'un projet
+2024-09-24 14:48:44 [main] INFO  m.j.c.b.P.GestionProjetsCLI - 4. Quitter
+2024-09-24 14:48:44 [main] INFO  m.j.c.b.P.GestionProjetsCLI - Choisissez une option : 

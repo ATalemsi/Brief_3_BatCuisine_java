@@ -1,0 +1,53 @@
+2024-09-24 14:51:31 [main] INFO  m.j.c.b.P.GestionProjetsCLI - === Bienvenue dans l'application de gestion des projets de rÃ©novation de cuisines ===
+2024-09-24 14:51:31 [main] INFO  m.j.c.b.P.GestionProjetsCLI - === Menu Principal ===
+2024-09-24 14:51:31 [main] INFO  m.j.c.b.P.GestionProjetsCLI - 1. CrÃ©er un nouveau projet
+2024-09-24 14:51:31 [main] INFO  m.j.c.b.P.GestionProjetsCLI - 2. Afficher les projets existants
+2024-09-24 14:51:31 [main] INFO  m.j.c.b.P.GestionProjetsCLI - 3. Calculer le coÃ»t d'un projet
+2024-09-24 14:51:31 [main] INFO  m.j.c.b.P.GestionProjetsCLI - 4. Quitter
+2024-09-24 14:51:31 [main] INFO  m.j.c.b.P.GestionProjetsCLI - Choisissez une option : 
+2024-09-24 14:51:50 [main] INFO  m.j.c.b.P.GestionProjetsCLI - === Bienvenue dans l'application de gestion des projets de rÃ©novation de cuisines ===
+2024-09-24 14:51:50 [main] INFO  m.j.c.b.P.GestionProjetsCLI - === Menu Principal ===
+2024-09-24 14:51:50 [main] INFO  m.j.c.b.P.GestionProjetsCLI - 1. CrÃ©er un nouveau projet
+2024-09-24 14:51:50 [main] INFO  m.j.c.b.P.GestionProjetsCLI - 2. Afficher les projets existants
+2024-09-24 14:51:50 [main] INFO  m.j.c.b.P.GestionProjetsCLI - 3. Calculer le coÃ»t d'un projet
+2024-09-24 14:51:50 [main] INFO  m.j.c.b.P.GestionProjetsCLI - 4. Quitter
+2024-09-24 14:51:50 [main] INFO  m.j.c.b.P.GestionProjetsCLI - Choisissez une option : 
+2024-09-24 14:52:15 [main] INFO  m.j.c.b.P.GestionProjetsCLI - === Bienvenue dans l'application de gestion des projets de rÃ©novation de cuisines ===
+2024-09-24 14:52:15 [main] INFO  m.j.c.b.P.GestionProjetsCLI - === Menu Principal ===
+2024-09-24 14:52:15 [main] INFO  m.j.c.b.P.GestionProjetsCLI - 1. CrÃ©er un nouveau projet
+2024-09-24 14:52:15 [main] INFO  m.j.c.b.P.GestionProjetsCLI - 2. Afficher les projets existants
+2024-09-24 14:52:15 [main] INFO  m.j.c.b.P.GestionProjetsCLI - 3. Calculer le coÃ»t d'un projet
+2024-09-24 14:52:15 [main] INFO  m.j.c.b.P.GestionProjetsCLI - 4. Quitter
+2024-09-24 14:52:15 [main] INFO  m.j.c.b.P.GestionProjetsCLI - Choisissez une option : 
+2024-09-24 14:52:20 [main] INFO  m.j.c.b.P.GestionProjetsCLI - --- CrÃ©ation d'un Nouveau Projet ---
+2024-09-24 15:00:43 [main] INFO  m.j.c.b.P.GestionProjetsCLI - === Bienvenue dans l'application de gestion des projets de rénovation de cuisines ===
+2024-09-24 15:00:43 [main] INFO  m.j.c.b.P.GestionProjetsCLI - === Menu Principal ===
+2024-09-24 15:00:43 [main] INFO  m.j.c.b.P.GestionProjetsCLI - 1. Créer un nouveau projet
+2024-09-24 15:00:43 [main] INFO  m.j.c.b.P.GestionProjetsCLI - 2. Afficher les projets existants
+2024-09-24 15:00:43 [main] INFO  m.j.c.b.P.GestionProjetsCLI - 3. Calculer le coût d'un projet
+2024-09-24 15:00:43 [main] INFO  m.j.c.b.P.GestionProjetsCLI - 4. Quitter
+2024-09-24 15:00:43 [main] INFO  m.j.c.b.P.GestionProjetsCLI - Choisissez une option : 
+2024-09-24 15:00:49 [main] INFO  m.j.c.b.P.GestionProjetsCLI - --- Création d'un Nouveau Projet ---
+2024-09-24 15:02:55 [main] ERROR m.j.c.b.P.GestionProjetsCLI - Erreur de connexion à la base de données : No line found
+2024-09-24 16:41:20 [main] INFO  m.j.c.b.P.GestionProjetsCLI - === Bienvenue dans l'application de gestion des projets de rénovation de cuisines ===
+2024-09-24 16:41:20 [main] INFO  m.j.c.b.P.GestionProjetsCLI - === Menu Principal ===
+2024-09-24 16:41:20 [main] INFO  m.j.c.b.P.GestionProjetsCLI - 1. Créer un nouveau projet
+2024-09-24 16:41:20 [main] INFO  m.j.c.b.P.GestionProjetsCLI - 2. Afficher les projets existants
+2024-09-24 16:41:20 [main] INFO  m.j.c.b.P.GestionProjetsCLI - 3. Calculer le coût d'un projet
+2024-09-24 16:41:20 [main] INFO  m.j.c.b.P.GestionProjetsCLI - 4. Quitter
+2024-09-24 16:41:20 [main] INFO  m.j.c.b.P.GestionProjetsCLI - Choisissez une option : 
+2024-09-24 16:58:29 [main] INFO  m.j.c.b.P.GestionProjetsCLI - === Bienvenue dans l'application de gestion des projets de rÃ©novation de cuisines ===
+2024-09-24 16:58:29 [main] INFO  m.j.c.b.P.GestionProjetsCLI - === Menu Principal ===
+2024-09-24 16:58:29 [main] INFO  m.j.c.b.P.GestionProjetsCLI - 1. CrÃ©er un nouveau projet
+2024-09-24 16:58:29 [main] INFO  m.j.c.b.P.GestionProjetsCLI - 2. Afficher les projets existants
+2024-09-24 16:58:29 [main] INFO  m.j.c.b.P.GestionProjetsCLI - 3. Calculer le coÃ»t d'un projet
+2024-09-24 16:58:29 [main] INFO  m.j.c.b.P.GestionProjetsCLI - 4. Quitter
+2024-09-24 16:58:29 [main] INFO  m.j.c.b.P.GestionProjetsCLI - Choisissez une option : 
+2024-09-24 17:05:50 [main] INFO  m.j.c.b.P.GestionProjetsCLI - === Bienvenue dans l'application de gestion des projets de rénovation de cuisines ===
+2024-09-24 17:05:50 [main] INFO  m.j.c.b.P.GestionProjetsCLI - === Menu Principal ===
+2024-09-24 17:05:50 [main] INFO  m.j.c.b.P.GestionProjetsCLI - 1. Créer un nouveau projet
+2024-09-24 17:05:50 [main] INFO  m.j.c.b.P.GestionProjetsCLI - 2. Afficher les projets existants
+2024-09-24 17:05:50 [main] INFO  m.j.c.b.P.GestionProjetsCLI - 3. Calculer le coût d'un projet
+2024-09-24 17:05:50 [main] INFO  m.j.c.b.P.GestionProjetsCLI - 4. Quitter
+2024-09-24 17:05:50 [main] INFO  m.j.c.b.P.GestionProjetsCLI - Choisissez une option : 
+2024-09-24 17:05:53 [main] ERROR m.j.c.b.P.GestionProjetsCLI - Erreur de connexion à la base de données : null

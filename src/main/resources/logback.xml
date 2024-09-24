@@ -1,13 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <configuration>
+    <!-- Define the logging context name -->
+    <contextName>baticuisineLoggerContext</contextName>
+
+    <!-- Console appender for console output -->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%msg%n</pattern> <!-- This will print only the message -->
+            <pattern>%msg%n</pattern> <!-- Simple message pattern for console -->
         </encoder>
     </appender>
 
-    <logger name="main.java.com.baticuisine.Presentation.GestionProjetsCLI" level="INFO" />
+    <!-- File appender for logging to a file -->
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <!-- Specify the path and name of the log file -->
+        <file>src/main/logs/app.log</file>
+        <!-- Optional: Set append to true to not overwrite the log file on each run -->c
+        <append>true</append>
+        <encoder>
+            <!-- Detailed pattern for log file entries -->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
 
-    <root level="INFO">
-        <appender-ref ref="CONSOLE" />
+    <!-- Root logger configuration -->
+    <root level="info">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
     </root>
 </configuration>
