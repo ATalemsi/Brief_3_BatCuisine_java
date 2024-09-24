@@ -94,14 +94,14 @@
 ## Instructions d'Installation
 
 1. Clonez le dépôt :  
-   `git clone https://github.com/username/bati-cuisine.git`
+   `git clone https://github.com/ATalemsi/Brief_3_BatCuisine_java`
    
 2. Ouvrez le projet dans votre IDE préféré (par exemple IntelliJ IDEA ou Eclipse).
 
-3. Compilez le projet :  
-   `mvn clean install`
 
-4. Exécutez le fichier principal `Main.java`.
+
+3. Exécutez le fichier principal `java -jar .\out\artifacts\BatCuisine_jar\BatCuisine.jar
+`.
 
 ---
 
@@ -115,8 +115,8 @@
 
 ## Auteurs
 
-- **Nom** : [Votre nom]
-- **Email** : [Votre email]
+- **Nom** : ABDELLAH TALEMSI
+- **Email** : mohamadtalemsi@gmail.com
 
 ---
 
